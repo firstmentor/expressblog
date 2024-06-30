@@ -18,13 +18,13 @@
                             <img src="<%= d.image.url %>" width="500px" height="400px" alt="blog1" />
                         </div>
                         <div class="blog-desc">
-                            <p>
+                            <p style="text-align: justify;">
                                 <%= d.description %>
                             </p>
 
                         </div>
-                    </div>
-                </div>
+                    </div><!--blog left-->
+                </div><!--col-md-8-->
                 <div class="col-md-4">
                     <div class="blog-right">
                         <div class="right-widget recent-post">
@@ -44,9 +44,9 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <% }) %>
+                                <% }) %>
                             </a>
-
+                        
 
                             <div class="right-widget categories">
                                 <h3>Categories</h3>
@@ -57,15 +57,23 @@
                                             </a></li>
 
                                     </ul>
-                                    <% }) %>
+                                <% }) %>
 
                             </div>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </div><!--right-widget recent-post end-->
+                    </div><!--blog right end-->
+                </div><!--col-md-4 end-->
+            </div><!--row end-->
+        </div><!--container-->    
     </section>
+
+
+
+
+
+
+
     <!--like-->
     <div class="container d-flex ">
         <form action="/like" method="post">

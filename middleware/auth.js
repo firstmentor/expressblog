@@ -25,3 +25,10 @@ const checkAdminAuth = async (req, res, next) => {
 
 
 module.exports = checkAdminAuth
+
+    mvc
+
+
+    MODEL 
+    VIEW ---(HTML CSS)
+    CONTROLLER

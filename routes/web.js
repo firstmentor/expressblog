@@ -27,6 +27,8 @@ router.get('/bloglist/:name', FrontendController.bloglist)
 
 
 
+
+
 // Admin Controller
 router.get('/admin/dashboard',auth, AdminController.dashboard)
 router.post('/SIGNIN', AdminController.register)
@@ -35,6 +37,7 @@ router.post('/verifylogin', AdminController.verifylogin)
 router.get('/logout',AdminController.logout)
 router.get('/userdisplay',auth,AdminController.UserDisplay)
 router.get('/admin/userdelete/:id',auth,AdminController.userdelete)
+router.get('/admin/userblogAll', AdminController.userblogAll)
 
 
 

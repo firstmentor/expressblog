@@ -33,7 +33,7 @@ class BlogController {
             //console.log(req.files.image)
             const {is_Varified,id} =req.admin
             const file = req.files.image
-            const myimage = await cloudinary.uploader.upload(file.tempFilePath, {
+            const image_upload = await cloudinary.uploader.upload(file.tempFilePath, {
                 folder: 'blogImage'
             })
             //console.log(myimage)
@@ -45,8 +45,8 @@ class BlogController {
                 author_name:req.admin.name,
                 user_id :id,
                 image: {
-                    public_id: myimage.public_id,
-                    url: myimage.secure_url
+                    public_id: image_upload.public_id,
+                    url: image_upload.secure_url
                 }
             })
 
@@ -80,6 +80,7 @@ class BlogController {
             const {is_Varified} =req.admin
             const result = await BlogModel.findById(req.params.id)
             // console.log(result)
+            req.flash('success', 'update successfull')
             res.render('admin/blog/edit', { edit: result ,is_Varified:is_Varified})
         }
         catch (error) {
@@ -93,14 +94,14 @@ class BlogController {
     static blogUpdate = async (req, res) => {
 
         try {
-            // console.log(req.body)
+            //console.log(req.files.image)
             // console.log(req.params.id)
             // first delete the image
             if (req.files) {
                 const blog = await BlogModel.findById(req.params.id)
                 const imageid = blog.image.public_id
 
-                //  console.log(imageid)
+                //console.log(imageid)
                 await cloudinary.uploader.destroy(imageid)
 
                 // second update image
@@ -111,7 +112,7 @@ class BlogController {
 
 
 
-                var data = {
+                data = {
                     title: req.body.title,
                     description: req.body.description,
                     image: {
@@ -120,16 +121,15 @@ class BlogController {
                     }
                 }
 
-            }
-
-            else {
-                var data = {
+            }else {
+                data = {
                     title: req.body.title,
                     description: req.body.description
                 }
             }
-            const update = await BlogModel.findByIdAndUpdate(req.params.id, data)
-            await update.save()
+            
+            await BlogModel.findByIdAndUpdate(req.params.id, data)
+            req.flash('success', 'Update Success')
             res.redirect('/admin/blogdisplay')
         }
         catch (error) {
@@ -249,10 +249,7 @@ class BlogController {
     }
 
     static sendEmail = async (email,name,is_Varified) => {
-        // console.log("email sending")
-        //console.log("propertyName")
-        console.log(email)
-    
+       
         //connenct with the smtp server
     
         let transporter = await nodemailer.createTransport({
@@ -273,6 +270,21 @@ class BlogController {
         });
         //console.log("Messge sent: %s", info.messageId);
       };
+
+
+    static userblogAll = async (req, res) => {
+
+        try {
+            const {is_Varified,_id} =req.admin
+            const data = await BlogModel.find().sort({_id:-1})
+            
+            //console.log(data)
+            res.render('admin/blog/userblogAll', { d: data, is_Varified:is_Varified})
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     
 

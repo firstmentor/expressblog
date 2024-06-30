@@ -6,22 +6,15 @@ const web =require('./routes/web')
 const connectDB = require('./db/connect_db')
 const { urlencoded } = require('express')
 const fileUpload = require("express-fileupload");
-var cloudinary = require('cloudinary');
-var session = require('express-session')
-var flash = require('connect-flash');
+
+let session = require('express-session')
+let flash = require('connect-flash');
 
 // cookies
 const cookieparser = require('cookie-parser')
 app.use(cookieparser())
-
-
-
-
 // connect db
 connectDB()
-
-
-
 // ejs setup
 app.set('view engine', 'ejs')
 

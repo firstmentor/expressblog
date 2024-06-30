@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const nodemailer =require('nodemailer')
 
+
 class AdminController {
 
 
@@ -18,7 +19,7 @@ class AdminController {
 
     static register = async (req, res) => {
         try {
-            //console.log(req.body)
+            console.log(req.body)
 
             const { name, email, password, confirmpassword, phone, address } = req.body
             const admin = await AdminModel.findOne({ email: email })
@@ -89,7 +90,7 @@ class AdminController {
           to: email, // list of receivers
           subject: "Create Blog Registration Succesfully", // Subject line
           text: "heelo", // plain text body
-          html: `<b>${name}</b> Registration is successful! plz wait Approved login.. `, // html body
+          html: `<b>${name}</b> Book School is successful! `, // html body
         });
         //console.log("Messge sent: %s", info.messageId);
       };
